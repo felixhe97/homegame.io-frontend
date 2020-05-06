@@ -1,0 +1,45 @@
+{
+  "name": "homegame.io-frontend",
+  "version": "0.0.1",
+  "description": "React frontend for homegame.io",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development",
+    "test": "jest --coverage ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felixhe97/homegame.io-frontend.git"
+  },
+  "keywords": [
+    "react",
+    "homegame",
+    "homegame.io",
+    "frontend"
+  ],
+  "author": "felixhe97",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felixhe97/homegame.io-frontend/issues"
+  },
+  "homepage": "https://github.com/felixhe97/homegame.io-frontend#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.5.3",
+    "jest": "^26.0.1",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-hot-loader": "^4.12.21"
+  }
+}
