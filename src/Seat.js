@@ -1,4 +1,6 @@
-import React, {Component} from "react";
+import React from "react";
+
+
 
 function Avatar(props) {
     return (
@@ -19,16 +21,20 @@ function Name(props) {
 
 function StackSize(props) {
     return (
-        <div className="stack">
+        <p className="stack">
             {props.size}
-        </div>
+        </p>
     );
 }
 
-class Player extends Component {
+class Player extends React.Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            userName : [], // get username
+            avatarIMG: [], // get avatarIMG
+            stackSize : 0  // get stackSize
+        };
     }
 
     componentDidMount() {
@@ -38,31 +44,43 @@ class Player extends Component {
     componentWillUnmount() {
 
     }
+
     render() {
         return (
             <div className="PlayerInfo">
-                <Avatar imgURL={props.avatar} userName={props.name}/>
-                <Name userName={props.name}/>
-                <StackSize size={props.stackSize}/>
+                <Avatar imgURL={this.state.avatarIMG} userName={this.state.userName}/>
+                <Name userName={this.state.userName}/>
+                <StackSize size={this.state.stackSize}/>
             </div>
         );
     }
     
 }
 
-class Seat extends Component {
+class Seat extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             available: true
         };
+        this.handleClick = this.handleClick.bind(this);
     }
 
-    onJoin() {
-
+    handleClick() {
+        if (this.state.available) {
+            join().on()
+        }
     }
+
 
     render() {
         // TODO
+        return (
+            <div className="Seat" onClick={this.handleClick}>
+
+            </div>
+        );
     }
 }
+
+export default Seat;
