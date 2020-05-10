@@ -41,9 +41,9 @@ class Timer extends React.Component {
 
     render() {
         return (
-            <h1 className="HandTimer">
+            <meter className="HandTimer" min="0" max="100" low="33" high="66" optimum="80" value={this.state.timeLeft}>
                 {this.state.defaultTime}
-            </h1>
+            </meter>
         );
     }
 }

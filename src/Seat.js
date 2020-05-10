@@ -6,11 +6,16 @@ class Seat extends React.Component {
         super(props);
         this.state = {
             seatNum: props.seatNum,
-            available: true
+            available: props.available
         };
         this.handleClick = this.handleClick.bind(this);
     }
 
+    handleSitdownClick() {
+
+    }
+
+    
     handleClick() {
         if (this.state.available) { // fire off authentication that we sat down
             this.setState(state=>({available: false}));
@@ -22,7 +27,7 @@ class Seat extends React.Component {
         // TODO
         return (
             <div className="Seat" onClick={this.handleClick}>
-
+                Click to sit down.
             </div>
         );
     }
