@@ -1,7 +1,5 @@
 import React from "react";
-import Seat from "../src/Seat";
-
-
+import Seat from "./Seat.js";
 
 class Table extends React.Component {
     constructor(props) {
