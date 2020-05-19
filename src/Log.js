@@ -4,9 +4,10 @@ import React from "react";
 // all default clicked, if one clicked then hide that particular log,
 // dull the button, then if updates make thing bold
 
-class Log extends React.js {
-    
-
+class Log extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
     render() {
         return (
@@ -16,3 +17,5 @@ class Log extends React.js {
         );
     }
 }
+
+export default Log;
