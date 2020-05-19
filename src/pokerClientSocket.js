@@ -1,4 +1,5 @@
 import * as CONSTANTS from "./msgType.js";
+// TODO why are we using bits as message type
 
 function createJSONmessage(type, payload) {
     return {
@@ -32,44 +33,9 @@ class PokerClientSocket extends WebSocket {
         super(...args);
         this.onmessage = (serverMessage) => {
             let response = JSON.parse(serverMessage.data);
-            switch (response.type) {
-                case CONSTANTS.CHAT_MSG:
-                    // do stuff with chat here
-                    break;
-                case CONSTANTS.TABLE_SIT:
-                    this.dispatchEvent(new CustomEvent('table_sit', {
-                        detail: response
-                    }));
-                    break;
-                case CONSTANTS.TABLE_STAND:
-                    this.dispatchEvent(new CustomEvent('table_stand', {
-                        detail: response
-                    }));
-                    break;
-                    // todo below
-                case CONSTANTS.TABLE_TIMER:
-                    this.dispatchEvent(new CustomEvent('table_timer', {
-                        detail: response.payload
-                    }));
-                    break;
-                case CONSTANTS.PLAYER_ACTION:
-                    this.dispatchEvent(new CustomEvent('player_action', {
-                        detail: response.payload
-                    }));
-                    break;
-                case CONSTANTS.PLAYER_SHOW:
-                    this.dispatchEvent(new CustomEvent('player_show', {
-                        detail: response.payload
-                    }));
-                    break;
-                case CONSTANTS.HAND_RESULT:
-                    this.dispatchEvent(new CustomEvent('hand_result', {
-                        detail: response.payload
-                    }));
-                    break;
-                default:
-                    //
-            }
+            this.dispatchEvent(new CustomEvent(response.type, {
+                detail: response
+            }));
         };
     }
 
