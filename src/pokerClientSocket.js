@@ -8,6 +8,25 @@ function createJSONmessage(type, payload) {
     };
 }
 
+function createPromiseListener(toFireOn, timeout) {
+    return new Promise((resolve, reject) => {
+        const fn = (response) => {
+            if (response.detail.success) {
+                resolve(response.detail.payload);
+            } else {
+                reject(response.detail.payload);
+            }
+        }
+        this.addEventListener(toFireOn, fn, {once: true});
+        setTimeout(() => {
+            this.removeEventListener(fn);
+            reject(`${toFireOn} request timeout`);
+        }, timeout);
+    });
+}
+
+// TODO but what if server replies after timeout?
+
 class PokerClientSocket extends WebSocket {
     constructor(...args) {
         super(...args);
@@ -65,20 +84,7 @@ class PokerClientSocket extends WebSocket {
         const toSend = createJSONmessage(CONSTANTS.TABLE_SIT, 
             {table_id: tableID, seat_num: seatNum, user_identity_token: "todo"});
         this.send(JSON.stringify(toSend));
-        return new Promise((resolve, reject) => {
-            const fn = (response) => {
-                if (response.detail.success) {
-                    resolve(response.detail.payload);
-                } else {
-                    reject(response.detail.payload);
-                }
-            }
-            this.addEventListener('table_sit', fn, {once: true});
-            setTimeout(() => {
-                this.removeEventListener(fn);
-                reject("TABLE_SIT request timeout");
-            }, timeout);
-        });
+        return createPromiseListener('table_sit', timeout);
     }
 
     // can promise chain
@@ -86,20 +92,7 @@ class PokerClientSocket extends WebSocket {
         const toSend = createJSONmessage(CONSTANTS.TABLE_STAND,
             {table_id: tableID, seat_num: seatNum, user_identity_token: "todo"});
         this.send(JSON.stringify(toSend));
-        return new Promise((resolve, reject) => {
-            const fn = (response) => {
-                if (response.detail.success) {
-                    resolve(response.detail.payload);
-                } else {
-                    reject(response.detail.payload);
-                }
-            }
-            this.addEventListener('table_stand', fn, {once: true});
-            setTimeout(() => {
-                this.removeEventListener(fn);
-                reject("TABLE_STAND request timeout");
-            }, timeout);
-        });
+        return createPromiseListener('table_stand', timeout);
     }
 
     handAction(tableID, seatNum, timeout = 5000) {
