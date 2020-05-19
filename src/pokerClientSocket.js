@@ -67,7 +67,8 @@ class PokerClientSocket extends WebSocket {
         this.send(JSON.stringify(toSend));
         // TODO
     }
-
 }
+
+// TODO how do i execute and have a single global from multiple imports
 
 export default PokerClientSocket;

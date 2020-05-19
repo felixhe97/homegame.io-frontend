@@ -15,14 +15,14 @@ class Timer extends React.Component {
 
     tick() {
         if (this.state.timeLeft > 0) {
-            this.setState((state, props) => ({
+            this.setState((state) => ({
                 timeLeft: state.timeLeft - 1
             }));
             if (this.state.timeLeft === 0) {
                 // switch to timeBank
             }
         } else {
-            this.setState((state, props) => ({
+            this.setState((state) => ({
                 timeBank: state.timeBank - 1
             }));
             if (this.state.timeBank === 0) {

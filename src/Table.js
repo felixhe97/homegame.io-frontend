@@ -18,12 +18,14 @@ class Table extends React.Component {
 
     render() {
         return (
-            <Seat/>
-            <Seat/>
-            <Seat/>
-            <Seat/>
-            <Seat/>
-            <Seat/>
+            <div className="Table">
+                <Seat/>
+                <Seat/>
+                <Seat/>
+                <Seat/>
+                <Seat/>
+                <Seat/>
+            </div>
         );
     }
 }

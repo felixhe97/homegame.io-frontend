@@ -42,6 +42,7 @@ class Player extends React.Component {
                 <Avatar imgURL={this.state.avatarIMG} userName={this.state.userName}/>
                 <Name userName={this.state.userName}/>
                 <StackSize size={this.state.stackSize}/>
+                <Timer/> TODO
             </div>
         );
     }
