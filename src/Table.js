@@ -1,6 +1,5 @@
 import React from "react";
 import Seat from "./Seat.js";
-import PokerClientSocket from "./pokerClientSocket.js";
 
 class Table extends React.Component {
     constructor(props) {
@@ -9,23 +8,18 @@ class Table extends React.Component {
             history : [],
             seats : [],
         };
-        this.ws = new PokerClientSocket("TODO");
-    }
-
-    joinTable() {
-
     }
 
     render() {
         return (
-            <div className="Table">
+            <React.Fragment>
                 <Seat/>
                 <Seat/>
                 <Seat/>
                 <Seat/>
                 <Seat/>
                 <Seat/>
-            </div>
+            </React.Fragment>
         );
     }
 }

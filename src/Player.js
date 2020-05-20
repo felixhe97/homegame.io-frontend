@@ -26,24 +26,15 @@ function StackSize(props) {
     );
 }
 
-class Player extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            userName : [], // get username
-            avatarIMG: [], // get avatarIMG
-            stackSize : 0  // get stackSize
-        };
-    }
-
-    render() {
-        return (
-            <div className="PlayerInfo">
-                <Avatar imgURL={this.state.avatarIMG} userName={this.state.userName}/>
-                <Name userName={this.state.userName}/>
-                <StackSize size={this.state.stackSize}/>
-                <Timer/> TODO
-            </div>
-        );
-    }
+function Player(props) {
+    return (
+        <div className="PlayerInfo">
+            <Avatar imgURL={props.avatarIMG} userName={props.userName}/>
+            <Name userName={props.userName}/>
+            <StackSize size={state.stackSize}/>
+            <Timer timeBank={} defaultTime={}/>
+        </div>
+    );
 }
+
+export default Player;

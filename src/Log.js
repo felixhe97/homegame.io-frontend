@@ -4,15 +4,48 @@ import React from "react";
 // all default clicked, if one clicked then hide that particular log,
 // dull the button, then if updates make thing bold
 
+function ListItem(props) {
+    return <li>{props.value}</li>;
+}
+
+function MessageList(props) {
+    const chatItems = props.chatMessages.map((msg) => {
+        <ListItem key={msg.uid} value={msg}/>
+    });
+    return (
+        <ul>{chatItems}</ul>
+    );
+}
+
 class Log extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            handHistory: true,
+            banter: true,
+            announcements: true,
+            chatHistory: [],
+            toDisplay: []
+        };
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(event) {
+        this.setState(state => ({
+            [event.target.name]: !state[event.target.name],
+            toDisplay: state.chatHistory.filter((msg) => {
+                return state[msg.type];
+            })
+        }));
     }
 
     render() {
         return (
             <aside className="Log">
-
+                <button name="handHistory" type="button" onClick={this.handleClick}>Hand History</button>
+                <button name="banter" type="button" onClick={this.handleClick}>Banter</button>
+                <button name="announcements" type="button" onClick={this.handleClick}>Game Announcements</button>
+                <MessageList chatMessages={this.state.toDisplay}/>
             </aside>
         );
     }

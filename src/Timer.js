@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Expects a props containing timeBank for account time left, 
- * and default time for overall game sent in as props
+ * and default time for default game time sent in as props
  */
 class Timer extends React.Component {
     constructor(props) {

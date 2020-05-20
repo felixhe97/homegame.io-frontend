@@ -7,9 +7,11 @@ import Room from "./Room.js";
 class App extends React.Component {
   render(){
     return(
-      <div className="App">
-        <Room/>
-      </div>
+      <React.StrictMode>
+        <div className="App">
+          <Room/>
+        </div>
+      </React.StrictMode>
     );
   }
 }

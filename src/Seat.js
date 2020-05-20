@@ -1,6 +1,9 @@
 import React from "react";
 import Player from "./Player.js";
 
+import PokerClientSocket from './pokerClientSocket.js';
+const ws = new PokerClientSocket('TODO');
+
 class Seat extends React.Component {
     constructor(props) {
         super(props);
@@ -18,17 +21,26 @@ class Seat extends React.Component {
     
     handleClick() {
         if (this.state.available) { // fire off authentication that we sat down
-            this.setState(state=>({available: false}));
+            ws.sit('x', 4).then((payload) => {
+                this.setState((state) => ({available : false}));
+            }).catch(err => {
+                console.error(err);
+            });
         }
     }
 
 
     render() {
-        // TODO
+        let seatButton;
+        if (this.state.available) {
+            seatButton = <button className="Seat" onClick={this.handleClick}>Click to sit down.</button>;
+        } else {
+            seatButton = <Player/>;
+        }
         return (
-            <div className="Seat" onClick={this.handleClick}>
-                Click to sit down.
-            </div>
+            <React.Fragment>
+                {seatButton}
+            </React.Fragment>
         );
     }
 }

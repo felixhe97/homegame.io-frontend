@@ -1,5 +1,4 @@
 import * as CONSTANTS from "./msgType.js";
-// TODO why are we using bits as message type
 
 function createJSONmessage(type, payload) {
     return {
