@@ -10,7 +10,7 @@ function ListItem(props) {
 
 function MessageList(props) {
     const chatItems = props.chatMessages.map((msg) => {
-        <ListItem key={msg.uid} value={msg}/>
+        return <ListItem key={msg.uid} value={msg}/>
     });
     return (
         <ul>{chatItems}</ul>
@@ -31,8 +31,9 @@ class Log extends React.Component {
     }
 
     handleClick(event) {
+        let name = event.target.name;
         this.setState(state => ({
-            [event.target.name]: !state[event.target.name],
+            [name]: !state[name],
             toDisplay: state.chatHistory.filter((msg) => {
                 return state[msg.type];
             })

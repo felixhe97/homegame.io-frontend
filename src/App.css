@@ -1,4 +1,22 @@
+body {
+    height: 100%;
+    margin: 0;
+}
+
 .App {
     margin: 1rem;
     font-family: Arial, Helvetica, sans-serif;
+    display: grid;
+    min-width: 100%;
+    min-height: 100%;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: repeat(10, 10%);
+}
+
+.Log {
+
+}
+
+.PlayerInfo {
+    background: yellow
 }

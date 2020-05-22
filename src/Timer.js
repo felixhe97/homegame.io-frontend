@@ -9,30 +9,19 @@ class Timer extends React.Component {
         super(props);
         this.state = {
             timeBank: props.timeBank,
-            timeLeft: props.defaultTime
         };
     }
 
     tick() {
-        if (this.state.timeLeft > 0) {
-            this.setState((state) => ({
-                timeLeft: state.timeLeft - 1
-            }));
-            if (this.state.timeLeft === 0) {
-                // switch to timeBank
-            }
-        } else {
-            this.setState((state) => ({
+        if (this.state.timeBank > 0) {
+            this.setState(state => ({
                 timeBank: state.timeBank - 1
             }));
-            if (this.state.timeBank === 0) {
-                // end turn
-            }
-        }
+        }    
     }
 
     componentDidMount() {
-        this.countdown = setInterval(()=>tick(), 1000);
+        this.countdown = setInterval(() => this.tick(), 1000);
     }
 
     componentWillUnmount() {
@@ -41,8 +30,8 @@ class Timer extends React.Component {
 
     render() {
         return (
-            <meter className="HandTimer" min="0" max="100" low="33" high="66" optimum="80" value={this.state.timeLeft}>
-                {this.state.defaultTime}
+            <meter className="HandTimer" min="0" max="100" low="33" high="66" optimum="80" value={this.state.timeBank}>
+                {this.state.timeBank}
             </meter>
         );
     }

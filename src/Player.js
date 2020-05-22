@@ -26,15 +26,31 @@ function StackSize(props) {
     );
 }
 
-function Player(props) {
-    return (
-        <div className="PlayerInfo">
-            <Avatar imgURL={props.avatarIMG} userName={props.userName}/>
-            <Name userName={props.userName}/>
-            <StackSize size={state.stackSize}/>
-            <Timer timeBank={} defaultTime={}/>
-        </div>
-    );
+class Player extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        if (this.props.inTurn) {
+            return (
+                <section className="PlayerInfo">
+                    <Avatar imgURL="favicon.ico" userName={this.props.id}/>
+                    <Name userName={this.props.id}/>
+                    <StackSize size={this.props.stack}/>
+                    <Timer timeBank={this.props.timeBank}/>
+                </section>
+            );
+        } else {
+            return (
+                <section className="PlayerInfo">
+                    <Avatar imgURL="favicon.ico" userName={this.props.id}/>
+                    <Name userName={this.props.id}/>
+                    <StackSize size={this.props.stack}/>
+                </section>
+            );
+        }
+    }
 }
 
 export default Player;
