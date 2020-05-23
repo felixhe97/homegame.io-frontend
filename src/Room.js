@@ -21,6 +21,8 @@ class Room extends React.Component {
         super(props);
         this.state = {
             isLoggedIn: props.loggedIn,
+            userName: "",
+            userStack: 0,
             tableName: props.tableInfo.tableName,
             numSeats: props.tableInfo.seats,
             timeBank: props.tableInfo.timeBank,
@@ -29,12 +31,12 @@ class Room extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event) {
-        this.setState(state => ({
+    handleSubmit(userName, userStack) {
+        this.setState({
             isLoggedIn: true,
-            userName: state.username
-        }));
-        event.preventDefault();
+            userName: userName,
+            userStack: userStack
+        });
     }
 
     render() {
@@ -43,7 +45,7 @@ class Room extends React.Component {
                 <React.Fragment>
                     <RoomInfo info={this.props.tableInfo}/>
                     <Log/>
-                    <Table numSeats={this.state.numSeats} players={this.props.tableInfo.players}/>
+                    <Table userName={this.state.userName} userStack={this.state.userStack} numSeats={this.state.numSeats} players={this.props.tableInfo.players}/>
                 </React.Fragment>
             );
         } else {

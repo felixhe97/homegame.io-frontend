@@ -5,55 +5,81 @@ import Player from './Player.js';
 class Seat extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            available: props.available,
-        };
         this.handleClick = this.handleClick.bind(this);
     }
     
-    handleClick() {
-        if (this.state.available) { // fire off authentication that we sat down TODO
-            this.setState(state => ({
-                available: !state.available
-            }));
-        }
+    handleClick(event) {
+        this.props.onJoinSeat(this.props.index);
+        event.preventDefault();
     }
 
     render() {
         let seatButton;
-        if (this.state.available) {
+        if (!this.props.player) {
             seatButton = <button className="Seat" onClick={this.handleClick}>Click to sit down.</button>;
         } else {
             seatButton = <Player timeBank={this.props.player.timeBank} stack={this.props.player.stack} id={this.props.player.id}/>;
         }
         return (
-            <React.Fragment>
+            <section className="Seat">
                 {seatButton}
-            </React.Fragment>
+            </section>
         );
     }
 }
 
-// table has a middle thing for pot, seats circling, rotating button
+// table has a middle thing for pot, seats circling, rotating button TODO
 
 class Table extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            playerJoined: false,
+            currDealer: 0,
+            pot: 0,
+            seating: props.players
+        };
+        // TODO make it so that leaving or joining whether from user click
+        // or stream message makes no difference
+        this.handleJoinSeat = this.handleJoinSeat.bind(this);
+        this.handleLeaveSeat = this.handleLeaveSeat.bind(this);
     }
 
-    handleClick(event) {
-        // TODO how to check if available seat
+    handleJoinSeat(seatNum) {
+        this.setState((state) => {
+            if (state.playerJoined) {
+                // TODO why firing twice?
+                console.log("cannot join seat if already in table", seatNum);
+            } else {
+                // deepcopy array of objects
+                let seatingArr = JSON.parse(JSON.stringify(state.seating));
+                seatingArr[seatNum] = {
+                    id: this.props.userName,
+                    stack: this.props.userStack                
+                };
+                return {
+                    playerJoined: true,
+                    seating: seatingArr
+                };
+            }
+        });
+    }
+
+    handleLeaveSeat(seat) {
+        // TODO
     }
 
     render() {
-        let i = 0;
-        let seats = this.props.players.map((player) => {
+        let i = -1;
+        let seats = this.state.seating.map((player) => {
+            ++i;
             if (Object.keys(player).length === 0) {
-                return <Seat key={i++} available={true}/>;
+                return <Seat key={i} index={i} player={false} onJoinSeat={this.handleJoinSeat}/>;
             } else {
-                return <Seat key={player.id} available={false} player={player}/>;
+                return <Seat key={i} index={i} player={player}/>;
             }
         });
+        console.log(seats);
         return (
             <React.Fragment>
                 {seats}
