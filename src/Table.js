@@ -29,6 +29,9 @@ class Seat extends React.Component {
 }
 
 // table has a middle thing for pot, seats circling, rotating button TODO
+// the table has knowledge of each hand
+// the room has knowledge of account balance, observers etc
+// on each hand room passes table json of whom in each hand, updated stacks
 
 class Table extends React.Component {
     constructor(props) {

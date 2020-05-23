@@ -30,9 +30,15 @@ class Timer extends React.Component {
 
     render() {
         return (
-            <meter className="HandTimer" min="0" max="100" low="33" high="66" optimum="80" value={this.state.timeBank}>
-                {this.state.timeBank}
-            </meter>
+            <meter 
+                className="HandTimer" 
+                min="0" 
+                max="100" 
+                low="33" 
+                high="66" 
+                optimum="80" 
+                value={this.state.timeBank}
+            />
         );
     }
 }

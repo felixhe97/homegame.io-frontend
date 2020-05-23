@@ -3,7 +3,8 @@ import Timer from "./Timer.js";
 
 function Avatar(props) {
     return (
-        <img className="avatar"
+        <img 
+            className="avatar"
             src={props.imgURL}
             alt={props.userName}
         />
@@ -35,18 +36,24 @@ class Player extends React.Component {
         if (this.props.inTurn) {
             return (
                 <section className="PlayerInfo">
-                    <Avatar imgURL="favicon.ico" userName={this.props.id}/>
-                    <Name userName={this.props.id}/>
-                    <StackSize size={this.props.stack}/>
-                    <Timer timeBank={this.props.timeBank}/>
+                    <Avatar
+                        imgURL="favicon.ico"
+                        userName={this.props.id}
+                    />
+                    <Name userName={this.props.id} />
+                    <StackSize size={this.props.stack} />
+                    <Timer timeBank={this.props.timeBank} />
                 </section>
             );
         } else {
             return (
                 <section className="PlayerInfo">
-                    <Avatar imgURL="favicon.ico" userName={this.props.id}/>
-                    <Name userName={this.props.id}/>
-                    <StackSize size={this.props.stack}/>
+                    <Avatar
+                        imgURL="favicon.ico"
+                        userName={this.props.id}
+                    />
+                    <Name userName={this.props.id} />
+                    <StackSize size={this.props.stack} />
                 </section>
             );
         }

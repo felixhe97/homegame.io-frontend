@@ -8,10 +8,10 @@ function RoomInfo(props) {
     return (
         <header>
             Table: {props.info.name}
-            <br/>
+            <br />
             Seats: {props.info.seats}
-            <br/>
-            Blinds: {props.info.blinds/2}/{props.info.blinds}NL
+            <br />
+            Blinds: {props.info.blinds / 2}/{props.info.blinds}NL
         </header>
     );
 }
@@ -43,15 +43,20 @@ class Room extends React.Component {
         if (this.state.isLoggedIn) {
             return (
                 <React.Fragment>
-                    <RoomInfo info={this.props.tableInfo}/>
-                    <Log/>
-                    <Table userName={this.state.userName} userStack={this.state.userStack} numSeats={this.state.numSeats} players={this.props.tableInfo.players}/>
+                    <RoomInfo info={this.props.tableInfo} />
+                    <Log />
+                    <Table
+                        userName={this.state.userName}
+                        userStack={this.state.userStack}
+                        numSeats={this.state.numSeats}
+                        players={this.props.tableInfo.players}
+                    />
                 </React.Fragment>
             );
         } else {
             return (
                 <React.Fragment>
-                    <LoginForm onSubmit={this.handleSubmit}/>
+                    <LoginForm onSubmit={this.handleSubmit} />
                 </React.Fragment>
             )
         }

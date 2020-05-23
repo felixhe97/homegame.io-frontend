@@ -38,7 +38,10 @@ class App extends React.Component {
         return (
             <React.StrictMode>
                 <div className="App">
-                    <Room loggedIn={false} tableInfo={getRoomInfo()} />
+                    <Room 
+                        loggedIn={false} 
+                        tableInfo={getRoomInfo()} 
+                    />
                 </div>
             </React.StrictMode>
         );
