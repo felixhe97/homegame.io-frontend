@@ -1,6 +1,7 @@
 import React from "react";
 
 import Player from './Player.js';
+import Pot from './Pot.js';
 
 class Seat extends React.Component {
     constructor(props) {
@@ -82,11 +83,13 @@ class Table extends React.Component {
                 return <Seat key={i} index={i} player={player}/>;
             }
         });
-        console.log(seats);
         return (
-            <React.Fragment>
-                {seats}
-            </React.Fragment>
+            <main className="Table">
+                <section className="Seats">
+                    {seats}
+                </section>
+                <Community cards={['ah','2d','kc','4s']} amount={4230} />
+            </main>
         );
     }
 }

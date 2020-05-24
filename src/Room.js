@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Profiler } from 'react';
 
 import Log from './Log.js';
 import Table from './Table.js';

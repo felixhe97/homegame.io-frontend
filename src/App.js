@@ -13,21 +13,23 @@ function getRoomInfo() {
         players: [
             {
                 id: "felix",
-                stack: 1000
+                stack: 1000,
+                seatNum: 0
             },
-            {},
             {
                 id: "joe",
-                stack: 200
+                stack: 200,
+                seatNum: 2
             },
             {
                 id: "ben",
-                stack: 20
+                stack: 20,
+                seatNum: 4,
             },
-            {},
             {
                 id: "subi",
-                stack: 423
+                stack: 42,
+                seatNum: 5
             }
         ]
     };
@@ -38,9 +40,9 @@ class App extends React.Component {
         return (
             <React.StrictMode>
                 <div className="App">
-                    <Room 
-                        loggedIn={false} 
-                        tableInfo={getRoomInfo()} 
+                    <Room
+                        loggedIn={false}
+                        tableInfo={getRoomInfo()}
                     />
                 </div>
             </React.StrictMode>
