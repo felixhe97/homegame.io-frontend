@@ -70,7 +70,15 @@ class Table extends React.Component {
     }
 
     handleLeaveSeat(seat) {
-        // TODO
+        this.setState((state) => {
+            if (state.playerJoined && this.props.userName === seat.target.id) {
+
+            } else if (true) { // seat has a different player
+
+            } else {
+                console.log("error");
+            }
+        });
     }
 
     render() {
