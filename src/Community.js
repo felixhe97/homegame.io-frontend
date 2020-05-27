@@ -3,16 +3,16 @@ import React from 'react';
 import Pot from './Pot.js';
 
 function Community(props) {
-    let cardToDisplay = this.props.cards.map(card => {
+    let cardToDisplay = props.cards.map(card => {
         return <Card key={card} card={card} />
     });
     return (
         <section className="Community">
-            <section className="CommunityCards">
+            <section className="Community-Cards">
                 {cardToDisplay}
             </section>
-            <section className="CommunityPot">
-                <Pot amount={this.props.pot} />
+            <section className="Community-Pot">
+                <Pot amount={props.pot} />
             </section>
         </section>
     );

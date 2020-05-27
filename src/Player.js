@@ -1,5 +1,6 @@
 import React from "react";
 import Timer from "./Timer.js";
+import Card from "./Card.js";
 
 function Avatar(props) {
     return (
@@ -27,6 +28,17 @@ function StackSize(props) {
     );
 }
 
+function PlayerCards(props) {
+    let playerCards = this.props.cards.map(card => {
+        return <Card key={card} card={card} onClick={props.handleClick} />
+    });
+    return (
+        <div className="Player-Cards">
+            {playerCards}
+        </div>
+    );
+}
+
 class Player extends React.Component {
     constructor(props) {
         super(props);
@@ -38,11 +50,12 @@ class Player extends React.Component {
                 <section className="PlayerInfo">
                     <Avatar
                         imgURL="favicon.ico"
-                        userName={this.props.id}
+                        userName={this.props.player.id}
                     />
-                    <Name userName={this.props.id} />
-                    <StackSize size={this.props.stack} />
-                    <Timer timeBank={this.props.timeBank} />
+                    <Name userName={this.props.player.id} />
+                    <StackSize size={this.props.player.stack} />
+                    <PlayerCards cards={this.props.cards} />
+                    <Timer timeBank={this.props.player.timeBank} />
                 </section>
             );
         } else {
@@ -50,10 +63,10 @@ class Player extends React.Component {
                 <section className="PlayerInfo">
                     <Avatar
                         imgURL="favicon.ico"
-                        userName={this.props.id}
+                        userName={this.props.player.id}
                     />
-                    <Name userName={this.props.id} />
-                    <StackSize size={this.props.stack} />
+                    <Name userName={this.props.player.id} />
+                    <StackSize size={this.props.player.stack} />
                 </section>
             );
         }

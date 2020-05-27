@@ -1,7 +1,10 @@
 import React from 'react';
 
+/**
+ * Display chip graphics and size
+ * @param {*} props 
+ */
 function Pot(props) {
-    // display chips
     return (
         <div className="Pot">
             {props.amount}

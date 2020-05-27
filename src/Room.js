@@ -1,8 +1,40 @@
-import React, { Profiler } from 'react';
+import React from 'react';
 
 import Log from './Log.js';
 import Table from './Table.js';
 import LoginForm from './LoginForm.js';
+import Action from './Action/Action.js';
+
+function getRoomInfo() {
+    return {
+        name: "testRoom",
+        seats: 6,
+        timeBank: 30,
+        blinds: 50,
+        players: [
+            {
+                id: "felix",
+                stack: 1000,
+                seatNum: 0
+            },
+            {
+                id: "joe",
+                stack: 200,
+                seatNum: 2
+            },
+            {
+                id: "ben",
+                stack: 20,
+                seatNum: 4,
+            },
+            {
+                id: "subi",
+                stack: 42,
+                seatNum: 5
+            }
+        ]
+    };
+}
 
 function RoomInfo(props) {
     return (
@@ -20,13 +52,8 @@ class Room extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoggedIn: props.loggedIn,
-            userName: "",
-            userStack: 0,
-            tableName: props.tableInfo.tableName,
-            numSeats: props.tableInfo.seats,
-            timeBank: props.tableInfo.timeBank,
-            blinds: props.tableInfo.blinds
+            isLoggedIn: false,
+            info: getRoomInfo()
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -43,14 +70,15 @@ class Room extends React.Component {
         if (this.state.isLoggedIn) {
             return (
                 <React.Fragment>
-                    <RoomInfo info={this.props.tableInfo} />
+                    <RoomInfo info={this.state.info} />
                     <Log />
                     <Table
                         userName={this.state.userName}
                         userStack={this.state.userStack}
-                        numSeats={this.state.numSeats}
-                        players={this.props.tableInfo.players}
+                        numSeats={this.state.info.numSeats}
+                        players={this.state.info.players}
                     />
+                    <Action />
                 </React.Fragment>
             );
         } else {

@@ -13,8 +13,34 @@ body {
     grid-template-rows: repeat(10, 10%);
 }
 
+.Seat {
+    
+}
+
 .Log {
 
+}
+
+.Red {
+    color: red;
+}
+
+.Black {
+    color: black;
+}
+
+.Orange {
+    color: orange;
+}
+
+.Green {
+    color: green;
+}
+
+.Card {
+    border: .2em solid black;
+    border-radius: 10%;
+    text-align: center; 
 }
 
 .PlayerInfo {
