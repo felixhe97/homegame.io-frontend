@@ -1,6 +1,6 @@
 import React from "react";
 import Timer from "./Timer.js";
-import Card from "./Card.js";
+import {Card} from "../Utils/Utils.js";
 
 function Avatar(props) {
     return (

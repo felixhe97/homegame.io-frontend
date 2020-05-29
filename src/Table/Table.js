@@ -1,5 +1,8 @@
 import React from "react";
 
+import Community from './Community.js';
+import Pot from './Pot.js';
+
 // table has a middle thing for pot, seats circling, rotating button TODO
 // the table has knowledge of each hand
 // the room has knowledge of account balance, observers etc

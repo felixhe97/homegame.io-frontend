@@ -1,1 +1,2 @@
-import Card from './Card.js';
+export {Card} from './Card.js';
+export {Chip} from './Chip.js';

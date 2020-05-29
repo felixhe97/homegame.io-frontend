@@ -48,6 +48,8 @@ function RoomInfo(props) {
     );
 }
 
+const UserNameContext = React.createContext('');
+
 class Room extends React.Component {
     constructor(props) {
         super(props);
@@ -69,7 +71,7 @@ class Room extends React.Component {
     render() {
         if (this.state.isLoggedIn) {
             return (
-                <React.Fragment>
+                <UserNameContext.Provider value={this.state.userName}>
                     <RoomInfo info={this.state.info} />
                     <Log />
                     <Table
@@ -79,7 +81,7 @@ class Room extends React.Component {
                         players={this.state.info.players}
                     />
                     <Action />
-                </React.Fragment>
+                </UserNameContext.Provider>
             );
         } else {
             return (
