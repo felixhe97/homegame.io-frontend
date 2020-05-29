@@ -40,7 +40,7 @@ class Table extends React.Component {
     handleJoinSeat(seatNum, player) {
         this.setState(state => {
             if (state.seating.find(p => p.id === player.id)) {
-
+                // todo error
             } else {
                 let seats = JSON.parse(JSON.stringify(state.seating));
                 seats[seatNum] = player;

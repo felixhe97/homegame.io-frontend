@@ -1,23 +1,32 @@
 import React from "react";
 
 /**
- * Expects a props containing timeBank for account time left, 
- * and default time for default game time sent in as props
+ * defaultTime={Number for hand time}
+ * timeBank={Number for account timebank}
  */
 class Timer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            timer: props.defaultTime,
             timeBank: props.timeBank,
         };
     }
 
     tick() {
-        if (this.state.timeBank > 0) {
-            this.setState(state => ({
-                timeBank: state.timeBank - 1
-            }));
-        }    
+        this.setState(state => {
+            if (state.timer > 0) {
+                return {
+                    timer: state.timer - 1
+                };
+            } else if (state.timeBank > 0) {
+                return {
+                    timeBank: state.timeBank - 1
+                };
+            } else {
+                // acknowledge hand timeout from server
+            }
+        });
     }
 
     componentDidMount() {
@@ -29,17 +38,28 @@ class Timer extends React.Component {
     }
 
     render() {
-        return (
-            <meter 
-                className="HandTimer" 
-                min="0" 
-                max="100" 
-                low="33" 
-                high="66" 
-                optimum="80" 
-                value={this.state.timeBank}
-            />
-        );
+        if (this.state.timer > 0) {
+            return (
+                <meter 
+                    className="HandTimer" 
+                    min="0" 
+                    max={this.props.defaultTime}
+                    low={this.props.defaultTime / 3} 
+                    high={this.props.defaultTime * 3 / 4}
+                    value={this.state.timer}
+                />
+            );
+        } else {
+            return (
+                <meter 
+                    className="HandTimer" 
+                    min="0" 
+                    max={this.props.timeBank}
+                    low={this.props.timeBank} 
+                    value={this.state.timeBank}
+                />
+            );
+        }
     }
 }
 

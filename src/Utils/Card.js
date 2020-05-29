@@ -1,7 +1,8 @@
 import React from 'react';
 
 /**
- * require card and onClick
+ * [card]={String representing card}
+ * [onClick]={callback to handle mouse click}
  */
 export class Card extends React.Component {
     constructor(props) {
@@ -15,7 +16,7 @@ export class Card extends React.Component {
     }
 
     render() {
-        if (this.props.card.length) {
+        if (this.props.card) {
             let suit;
             let cardColor;
             switch (this.props.card[1]) {
@@ -35,10 +36,8 @@ export class Card extends React.Component {
                     suit = "&clubs;";
                     cardColor = "Green";
                     break;
-                default:
-                    suit = "";
             }
-            return (
+            if (this.props.onClick) {
                 <div className="Card" onClick={this.handleClick}>
                     <p className={"Card-Number"}>
                         {this.props.card[0].toUpperCase()}
@@ -47,7 +46,16 @@ export class Card extends React.Component {
                         {suit}
                     </p>
                 </div>
-            );
+            } else {
+                <div className="Card">
+                    <p className={"Card-Number"}>
+                        {this.props.card[0].toUpperCase()}
+                    </p>
+                    <p className="Card-Suit">
+                        {suit}
+                    </p>
+                </div>
+            }
         } else {
             return (
                 <div className="BackOfCard"></div>
@@ -55,12 +63,3 @@ export class Card extends React.Component {
         }
     }
 }
-
-function defaultCard() {
-    return false;
-}
-
-Card.defaultProps = {
-    card: "",
-    onClick: defaultCard
-};
