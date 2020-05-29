@@ -1,5 +1,13 @@
 import React from 'react';
 
+function BetButton(props) {
+    return (
+        <button type="button" onClick={props.onClick}>
+            {props.multiplier}
+        </button>
+    );
+}
+
 // require pot size, min size, max size as props
 class BetSizer extends React.Component {
     constructor(props) {
@@ -7,15 +15,20 @@ class BetSizer extends React.Component {
         this.state = {
             size: 0
         };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
         // if a button clicked reflect change given
         // prop of stack size
+        let targetType = event.target.type;
+        let targetText = event.target.text;
+        let targetVal = event.target.value;
         this.setState(state => {
             let betSize = state.size;
-            if (event.target.type == "button") {
-                switch (event.target.text) {
+            if (targetType== "button") {
+                switch (targetText) {
                     case "1/4":
                         betSize = Math.round(this.props.potSize / 4);
                         break;
@@ -39,7 +52,7 @@ class BetSizer extends React.Component {
                         break;
                 }
             } else {
-                betSize = event.target.value;
+                betSize = targetVal;
             }
             return {size: betSize};
         });
@@ -64,51 +77,17 @@ class BetSizer extends React.Component {
                     value={this.state.size}
                     onChange={this.handleChange}
                 />
-                <button 
-                    type="button"
-                    onClick={this.handleChange}
-                >
-                    1/4
-                </button>
-                <button 
-                    onClick={this.handleChange}
-                    type="button"
-                >
-                    1/3
-                </button>
-                <button 
-                    type="button"
-                    onClick={this.handleChange}
-                >
-                    1/2
-                </button>
-                <button 
-                    type="button"
-                    onClick={this.handleChange}
-                >
-                    2/3
-                </button>
-                <button 
-                    type="button"
-                    onClick={this.handleChange}
-                >
-                    3/4
-                </button>
-                <button 
-                    type="button"
-                    onClick={this.handleChange}
-                >
-                    Pot
-                </button>
-                <button 
-                    type="button"
-                    onClick={this.handleChange}
-                >
-                    Max
-                </button>
+                <BetButton onClick={this.handleChange} multiplier="1/4" />
+                <BetButton onClick={this.handleChange} multiplier="1/3" />
+                <BetButton onClick={this.handleChange} multiplier="1/2" />
+                <BetButton onClick={this.handleChange} multiplier="2/3" />
+                <BetButton onClick={this.handleChange} multiplier="3/4" />
+                <BetButton onClick={this.handleChange} multiplier="Pot" />
+                <BetButton onClick={this.handleChange} multiplier="Max" />
                 <input 
                     type="number" 
                     value={this.state.size} 
+                    onChange={this.handleChange}
                 />
             </form>
         );

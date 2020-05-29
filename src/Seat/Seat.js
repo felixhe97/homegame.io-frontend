@@ -1,4 +1,8 @@
+import React from 'react';
+
 import Player from './Player.js';
+
+import UserContext from '../UserContext.js';
 
 class Seat extends React.Component {
     constructor(props) {
@@ -7,7 +11,7 @@ class Seat extends React.Component {
     }
     
     handleClick(event) {
-        this.props.onJoinSeat(this.props.index);
+        this.props.onClick(this.props.index, this.context);
         event.preventDefault();
     }
 
@@ -15,8 +19,10 @@ class Seat extends React.Component {
         let seat;
         if (!this.props.player) {
             seat = <button className="Seat" onClick={this.handleClick}>Click to sit down.</button>;
+        } else if (this.props.player.id == this.context.id) {
+            seat = <Player player={this.props.player} onClick={this.handleClick} />
         } else {
-            seat = <Player player={this.props.playerInfo}/>;
+            seat = <Player player={this.props.player}/>;
         }
         return (
             <section className="Seat">
@@ -25,5 +31,7 @@ class Seat extends React.Component {
         );
     }
 }
+
+Seat.contextType = UserContext;
 
 export default Seat;

@@ -3,7 +3,7 @@ import React from 'react';
 /**
  * require card and onClick
  */
-class Card extends React.Component {
+export class Card extends React.Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
@@ -39,9 +39,9 @@ class Card extends React.Component {
                     suit = "";
             }
             return (
-                <div className={cardClass} onClick={this.handleClick}>
+                <div className="Card" onClick={this.handleClick}>
                     <p className={"Card-Number"}>
-                        {props.card[0].toUpperCase()}
+                        {this.props.card[0].toUpperCase()}
                     </p>
                     <p className="Card-Suit">
                         {suit}
@@ -56,9 +56,11 @@ class Card extends React.Component {
     }
 }
 
+function defaultCard() {
+    return false;
+}
+
 Card.defaultProps = {
     card: "",
-    onClick: null
+    onClick: defaultCard
 };
-
-export default Card;

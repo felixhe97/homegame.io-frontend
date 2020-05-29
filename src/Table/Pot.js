@@ -6,9 +6,9 @@ import React from 'react';
  */
 function Pot(props) {
     return (
-        <div className="Pot">
+        <p className="Pot">
             {props.amount}
-        </div>
+        </p>
     );
 }
 

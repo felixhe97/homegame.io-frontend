@@ -1,7 +1,10 @@
 import React from "react";
 
 import Community from './Community.js';
+import Seat from '../Seat/Seat.js';
 import Pot from './Pot.js';
+
+import UserContext from '../UserContext.js';
 
 // table has a middle thing for pot, seats circling, rotating button TODO
 // the table has knowledge of each hand
@@ -11,24 +14,73 @@ import Pot from './Pot.js';
 class Table extends React.Component {
     constructor(props) {
         super(props);
+        let tempMap = {};
+        for (let player of props.players) {
+            tempMap[player.seatNum.toString()] = {
+                id: player.id,
+                stack: player.stack
+            };
+        }
+        let seating = [];
+        for (let i = 0; i < props.seats; ++i) {
+            if (i.toString() in tempMap) {
+                seating.push(tempMap[i]);
+            } else {
+                seating.push({});
+            }
+        }
+        this.state = {
+            seating: seating,
+            userSatDown: false
+        }
         this.handleJoinSeat = this.handleJoinSeat.bind(this);
         this.handleLeaveSeat = this.handleLeaveSeat.bind(this);
     }
 
-    handleJoinSeat(seatNum) {
+    handleJoinSeat(seatNum, player) {
+        this.setState(state => {
+            if (state.seating.find(p => p.id === player.id)) {
 
+            } else {
+                let seats = JSON.parse(JSON.stringify(state.seating));
+                seats[seatNum] = player;
+                if (player.id == this.context.id) {
+                    return {
+                        userSatDown: true,
+                        seating: seats
+                    };
+                } else {
+                    return {
+                        seating: seats
+                    };
+                }
+            }
+        })
     }
 
-    handleLeaveSeat(seat) {
-        
+    handleLeaveSeat(seatNum, player) {
+        console.log('fired');
+        this.setState(state => {
+            if (state.seating[seatNum] == player) {
+                let seats = JSON.parse(JSON.stringify(state.seating));
+                seats[seatNum] = {};
+                return {
+                    seating: seats
+                };
+            }
+        });
     }
 
     render() {
         let i = -1;
+        console.log(this.state.seating);
         let seats = this.state.seating.map((player) => {
             ++i;
-            if (Object.keys(player).length === 0) {
-                return <Seat key={i} index={i} player={false} onJoinSeat={this.handleJoinSeat}/>;
+            if (Object.keys(player).length === 0 && !this.state.userSatDown) {
+                return <Seat key={i} index={i} player={false} onClick={this.handleJoinSeat} />;
+            } else if (player.id === this.context.id) {
+                // TODO
+                return <Seat key={i} index={i} player={this.context} onClick={this.handleLeaveSeat} />;
             } else {
                 return <Seat key={i} index={i} player={player}/>;
             }
@@ -43,5 +95,7 @@ class Table extends React.Component {
         );
     }
 }
+
+Table.contextType = UserContext;
 
 export default Table;

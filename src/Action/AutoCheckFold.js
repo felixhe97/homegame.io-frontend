@@ -6,7 +6,7 @@ function AutoCheckFold(props) {
     return (
         <SelectButton 
             className="AutoCheckFold"
-            onClick={props.handleClick}    
+            onClick={props.onClick}    
         >
             Check/Fold
         </SelectButton>

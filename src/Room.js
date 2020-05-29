@@ -1,9 +1,11 @@
 import React from 'react';
 
-import Log from './Log.js';
-import Table from './Table.js';
+import Log from './ChatLog/Chatlog.js';
+import Table from './Table/Table.js';
 import LoginForm from './LoginForm.js';
 import Action from './Action/Action.js';
+
+import UserContext from './UserContext.js';
 
 function getRoomInfo() {
     return {
@@ -48,8 +50,6 @@ function RoomInfo(props) {
     );
 }
 
-const UserNameContext = React.createContext('');
-
 class Room extends React.Component {
     constructor(props) {
         super(props);
@@ -70,18 +70,22 @@ class Room extends React.Component {
 
     render() {
         if (this.state.isLoggedIn) {
+            let user = {
+                id: this.state.userName,
+                stack: this.state.userStack
+            };
             return (
-                <UserNameContext.Provider value={this.state.userName}>
+                <UserContext.Provider value={user}>
                     <RoomInfo info={this.state.info} />
                     <Log />
                     <Table
                         userName={this.state.userName}
                         userStack={this.state.userStack}
-                        numSeats={this.state.info.numSeats}
+                        seats={this.state.info.seats}
                         players={this.state.info.players}
                     />
                     <Action />
-                </UserNameContext.Provider>
+                </UserContext.Provider>
             );
         } else {
             return (

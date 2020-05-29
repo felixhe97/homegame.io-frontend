@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {Card} from '../Utils/Utils.js';
 import Pot from './Pot.js';
 
 function Community(props) {
