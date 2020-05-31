@@ -38,23 +38,27 @@ export class Card extends React.Component {
                     break;
             }
             if (this.props.onClick) {
-                <div className="Card" onClick={this.handleClick}>
-                    <p className={"Card-Number"}>
-                        {this.props.card[0].toUpperCase()}
-                    </p>
-                    <p className="Card-Suit">
-                        {suit}
-                    </p>
-                </div>
+                return (
+                    <div className="Card" onClick={this.handleClick}>
+                        <p className={"Card-Number"}>
+                            {this.props.card[0].toUpperCase()}
+                        </p>
+                        <p className="Card-Suit">
+                            {suit}
+                        </p>
+                    </div>
+                );
             } else {
-                <div className="Card">
-                    <p className={"Card-Number"}>
-                        {this.props.card[0].toUpperCase()}
-                    </p>
-                    <p className="Card-Suit">
-                        {suit}
-                    </p>
-                </div>
+                return (
+                    <div className="Card">
+                        <p className={"Card-Number"}>
+                            {this.props.card[0].toUpperCase()}
+                        </p>
+                        <p className="Card-Suit">
+                            {suit}
+                        </p>
+                    </div>
+                );
             }
         } else {
             return (
