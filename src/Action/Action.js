@@ -3,7 +3,9 @@ import React from 'react';
 import AutoCheckFold from './AutoCheckFold.js';
 import BetSizer from './BetSizer.js';
 
-// menu where action takes place
+/**
+ * potSize={Number}
+ */
 class Action extends React.Component {
     constructor(props) {
         super(props);
@@ -24,7 +26,7 @@ class Action extends React.Component {
         return (
             <React.Fragment>
                 <AutoCheckFold onClick={this.checkFoldClick} />
-                <BetSizer />
+                <BetSizer minSize={32} maxSize={1000} potSize={this.props.potSize} />
             </React.Fragment>
         );
     }

@@ -13,6 +13,7 @@ function getRoomInfo() {
         seats: 6,
         timeBank: 30,
         blinds: 50,
+        potSize: 231,
         players: [
             {
                 id: "felix",
@@ -84,7 +85,7 @@ class Room extends React.Component {
                         seats={this.state.info.seats}
                         players={this.state.info.players}
                     />
-                    <Action />
+                    <Action potSize={this.state.info.potSize} />
                 </UserContext.Provider>
             );
         } else {

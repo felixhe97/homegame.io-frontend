@@ -11,8 +11,8 @@ export class Card extends React.Component {
     }
 
     handleClick(event) {
-        this.props.onClick(this.props.card);
         event.preventDefault();
+        this.props.onClick(this.props.card);
     }
 
     render() {
@@ -62,7 +62,7 @@ export class Card extends React.Component {
             }
         } else {
             return (
-                <div className="BackOfCard"></div>
+                <div className="BackOfCard"/>
             )
         }
     }

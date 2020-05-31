@@ -4,31 +4,51 @@ import Player from './Player.js';
 
 import UserContext from '../UserContext.js';
 
+function SeatWrapper(props) {
+    return (
+        <section className="Seat">
+            {props.children}
+        </section>
+    );
+}
+
 class Seat extends React.Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
     }
-    
+
     handleClick(event) {
-        this.props.onClick(this.props.index, this.context);
         event.preventDefault();
+        this.props.onClick(this.props.index, this.context);
     }
 
     render() {
-        let seat;
         if (!this.props.player) {
-            seat = <button className="Seat" onClick={this.handleClick}>Click to sit down.</button>;
+            return (
+                <SeatWrapper>
+                    <button
+                        className="Seat"
+                        onClick={this.handleClick}
+                    >
+                        Click to sit down.
+                    </button>
+                </SeatWrapper>
+            );
         } else if (this.props.player.id == this.context.id) {
-            seat = <Player player={this.props.player} onClick={this.handleClick} />
+            return (
+                <Player
+                    player={this.props.player}
+                    onClick={this.handleClick}
+                />
+            );
         } else {
-            seat = <Player player={this.props.player}/>;
+            return (
+                <SeatWrapper>
+                    <Player player={this.props.player} />
+                </SeatWrapper>
+            )
         }
-        return (
-            <section className="Seat">
-                {seat}
-            </section>
-        );
     }
 }
 

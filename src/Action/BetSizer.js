@@ -8,7 +8,11 @@ function BetButton(props) {
     );
 }
 
-// require pot size, min size, max size as props
+/**
+ * potSize={Number}
+ * minSize={Number}
+ * maxSize={Number}
+ */
 class BetSizer extends React.Component {
     constructor(props) {
         super(props);
@@ -23,7 +27,7 @@ class BetSizer extends React.Component {
         // if a button clicked reflect change given
         // prop of stack size
         let targetType = event.target.type;
-        let targetText = event.target.text;
+        let targetText = event.target.textContent;
         let targetVal = event.target.value;
         this.setState(state => {
             let betSize = state.size;
@@ -54,14 +58,24 @@ class BetSizer extends React.Component {
             } else {
                 betSize = targetVal;
             }
+            if (betSize < this.props.minSize) {
+                betSize = this.props.minSize;
+            }
+            if (betSize > this.props.maxSize) {
+                betSize = this.props.maxSize;
+            }
             return {size: betSize};
         });
         event.preventDefault();
     }
 
     handleSubmit(event) {
-        this.props.onSubmit(this.state.size);
         event.preventDefault();
+        if (this.state.size < this.props.minSize || this.state.size > this.props.maxSize) {
+            console.log("error cannnot give backend improper bet sizing");
+        } else {
+            this.props.onSubmit(this.state.size);
+        }
     }
 
     render() {
@@ -89,6 +103,7 @@ class BetSizer extends React.Component {
                     value={this.state.size} 
                     onChange={this.handleChange}
                 />
+                <button type="submit">Bet</button>
             </form>
         );
     }

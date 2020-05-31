@@ -77,12 +77,32 @@ class Table extends React.Component {
         let seats = this.state.seating.map((player) => {
             ++i;
             if (Object.keys(player).length === 0 && !this.state.userSatDown) {
-                return <Seat key={i} index={i} player={false} onClick={this.handleJoinSeat} />;
+                return (
+                    <Seat
+                        key={i}
+                        index={i}
+                        player={false}
+                        onClick={this.handleJoinSeat}
+                    />
+                );
             } else if (player.id === this.context.id) {
                 // TODO
-                return <Seat key={i} index={i} player={this.context} onClick={this.handleLeaveSeat} />;
+                return (
+                    <Seat
+                        key={i}
+                        index={i}
+                        player={this.context}
+                        onClick={this.handleLeaveSeat}
+                    />
+                );
             } else {
-                return <Seat key={i} index={i} player={player}/>;
+                return (
+                    <Seat
+                        key={i}
+                        index={i}
+                        player={player}
+                    />
+                );
             }
         });
         return (
@@ -90,7 +110,7 @@ class Table extends React.Component {
                 <section className="Seats">
                     {seats}
                 </section>
-                <Community cards={['ah','2d','kc','4s']} amount={4230} />
+                <Community cards={['ah', '2d', 'kc', '4s']} amount={4230} />
             </main>
         );
     }
